@@ -1,0 +1,9 @@
+{
+ "name": "Letslearn",
+ "short_name": "Letslearn",
+ "display": "standalone",
+ "orientation": "landscape",
+ "start_url": "/",
+ "theme_color": "black",
+ "background_color": "black"
+ }

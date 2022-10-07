@@ -5,6 +5,7 @@
   <link rel="icon" href="data:;base64,=">
   <link rel="stylesheet" href="assets/default-ad53eec0.css" id="hightlightjs-css">
   <link rel="stylesheet" href="assets/dark-58dfb0c7.css" id="hightlightjs-css-dark">
+<link rel="manifest" href="assets/menifest.json">
   <link rel="stylesheet" href="assets/common-c1947636.css">
   <script>
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
@@ -14,6 +15,25 @@
     } else {
       window.hightlightjs_css_url =
         document.getElementById("hightlightjs-css").href;
+    }
+    var userAgent = navigator.userAgent.toLowerCase();
+    window.isElectron = userAgent.indexOf(" electron/") > 1;
+    if (window.isElectron) {
+      window.addEventListener("click", (ev) => {
+        for (i of ev.path) {
+          if (i.tagName == "A") {
+            if (
+              i.href != "" &&
+              !(i.href.startsWith("#") || i.href.startsWith("blob"))
+            ) {
+              ev.preventDefault();
+              console.log(i.href);
+              electron.shell.openExternal(i.href);
+            }
+          }
+        }
+      });
+      window.electron = require("electron");
     }
   </script>
   
